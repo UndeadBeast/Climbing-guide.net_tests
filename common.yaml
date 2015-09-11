@@ -1,0 +1,24 @@
+timeout: 60
+implicitly_timeout: 30
+account_name: gttu_0001
+account_e_mail: wraithundead@gmail.com
+account_password: lorem_ipsum
+cgn:
+    host: http://climbing-guide.net
+    language: ru
+test_data:
+    ru:
+        region_name: 'Буки'
+        sector_name: 'Центральный'
+        route_name: 'Суррогат'
+ui_elements:
+    ru:
+        log_ig: 'Log in'
+        log_out: 'Log out'
+        my_routes: 'Мои трассы'
+        my_settings: 'Мои настройки'
+        major_topo_name: 'Район'
+        minor_topo_name: 'Сектор'
+browser:
+    type: firefox
+    is_mobile: False
