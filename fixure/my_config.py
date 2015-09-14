@@ -4,7 +4,7 @@ import os
 __author__ = 'g_trofimov'
 
 
-scriptpath = os.path.dirname(__file__)
+scriptpath = os.path.dirname(os.path.dirname(__file__))
 config_path = os.path.join(scriptpath, 'common.yaml')
 my_config = lya.AttrDict.from_yaml(config_path)
 

@@ -1,7 +1,7 @@
 from grail import step
 from nose.tools import ok_
 from selenium import webdriver
-from old_structure.my_config import CGN_URL
+from fixure.my_config import CGN_URL
 from pages.home_page import CGNHomePage
 
 __author__ = 'g_trofimov'

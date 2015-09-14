@@ -1,3 +1,4 @@
+from fixure.session import SessionHelper
 from selenium.webdriver.firefox.webdriver import WebDriver
 
 __author__ = 'g_trofimov'
@@ -7,25 +8,10 @@ class Application():
     def __init__(self):
         self.wd = WebDriver()
         self.wd.implicitly_wait(60)
+        self.session = SessionHelper(self)
 
     def open_home_page(self):
         self.wd.get("http://climbing-guide.net/")
-
-    def log_in(self, account):
-        wd = self.wd
-        wd.find_element_by_link_text("Log in").click()
-        wd.find_element_by_id("login-form-login").click()
-        wd.find_element_by_id("login-form-login").clear()
-        wd.find_element_by_id("login-form-login").send_keys(account.username)
-        wd.find_element_by_id("login-form-password").click()
-        wd.find_element_by_id("login-form-password").clear()
-        wd.find_element_by_id("login-form-password").send_keys(account.password)
-        wd.find_element_by_xpath("//form[@id='login-form']//button[.='Авторизоваться']").click()
-
-    def log_out(self):
-        wd = self.wd
-        wd.find_element_by_css_selector("span.glyphicon.glyphicon-user").click()
-        wd.find_element_by_link_text("Log out").click()
 
     def add_ascend(self, ascend_date="04-09-2015", ascend_comment="qa test"):
         wd = self.wd
