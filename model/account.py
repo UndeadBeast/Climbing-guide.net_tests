@@ -5,7 +5,6 @@ __author__ = 'g_trofimov'
 
 
 class UserAccount(object):
-
     def __init__(self):
         self.username = None
         self.email = None
