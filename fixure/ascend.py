@@ -31,8 +31,7 @@ class AscendHelper:
         wd.find_element_by_id("userroutes-comment").send_keys(ascend_comment)
         wd.find_element_by_css_selector("div.modal-footer > button.btn.btn-success").click()
 
-    def delete(self):
+    def delete_first_element(self):
         wd = self.app.wd
-        wd.find_element_by_xpath("//div[@id='bs-example-navbar-collapse-1']/ul[2]/li[5]/a").click()
-        wd.find_element_by_link_text("Мои трассы").click()
+        self.app.navigation.open_my_routes_page()
         wd.find_element_by_xpath("//div[@id='w0']/table/tbody/tr/td[6]/a").click()

@@ -1,4 +1,5 @@
 from fixure.ascend import AscendHelper
+from fixure.navigation import NavigationHelper
 from fixure.session import SessionHelper
 from selenium.webdriver.firefox.webdriver import WebDriver
 
@@ -11,9 +12,7 @@ class Application():
         self.wd.implicitly_wait(60)
         self.session = SessionHelper(self)
         self.ascend = AscendHelper(self)
-
-    def open_home_page(self):
-        self.wd.get("http://climbing-guide.net/")
+        self.navigation = NavigationHelper(self)
 
     def destroy(self):
         self.wd.quit()

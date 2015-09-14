@@ -14,9 +14,9 @@ def app(request):
 
 
 def test_basic_checks(app):
-    app.open_home_page()
+    app.navigation.open_home_page()
     app.session.log_in(account=UserAccount())
     app.ascend.add()
     time.sleep(2)
-    app.ascend.delete()
+    app.ascend.delete_first_element()
     app.session.log_out()
