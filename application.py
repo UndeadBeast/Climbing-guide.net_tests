@@ -9,7 +9,7 @@ class Application():
         self.wd.implicitly_wait(60)
 
     def open_home_page(self):
-        self.wd.get("http://climbing-guide.net/ru")
+        self.wd.get("http://climbing-guide.net/")
 
     def log_in(self, account):
         wd = self.wd
