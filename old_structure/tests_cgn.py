@@ -1,7 +1,6 @@
 from grail import BaseTest
-import time
 # import steps_basic
-import steps_page_check
+from old_structure import steps_page_check
 
 __author__ = 'g_trofimov'
 

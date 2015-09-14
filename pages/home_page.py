@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from my_config import my_config
 from webium.controls.link import Link
+from old_structure import my_config
 from pages.common_page import CGNCommonPage
 from selenium.webdriver.common.by import By
 from webium.find import Find

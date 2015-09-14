@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import time
+
 import pytest
-from account import UserAccount
-from application import Application
+from model.account import UserAccount
+from fixure.application import Application
 
 
 @pytest.fixture

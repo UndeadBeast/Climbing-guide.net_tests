@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 # from common.ui.core.browser import Browser
 from grail import step
-from nose.tools import ok_, eq_
+from old_structure import my_config
 from selenium.webdriver.support.event_firing_webdriver import EventFiringWebDriver
 from selenium.webdriver.support.ui import Select
 from selenium import webdriver
-from account import UserAccount
-from my_config import my_config
-from my_config import CGN_URL
+from model.account import UserAccount
+from old_structure.my_config import CGN_URL
 from pages.home_page import CGNHomePage
-from screenshooter import ScreenshotListener
+from old_structure.screenshooter import ScreenshotListener
 
 __author__ = 'g_trofimov'
 

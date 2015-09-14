@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from my_config import my_config
+from old_structure import my_config
 
 __author__ = 'g_trofimov'
 
