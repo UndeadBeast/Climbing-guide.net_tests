@@ -1,8 +1,9 @@
 timeout: 60
 implicitly_timeout: 30
-account_name: gttu_0001
-account_e_mail: wraithundead@gmail.com
-account_password: lorem_ipsum
+account:
+    username: gttu_0001
+    e_mail: wraithundead@gmail.com
+    password: lorem_ipsum
 cgn:
     host: http://climbing-guide.net
     language: ru

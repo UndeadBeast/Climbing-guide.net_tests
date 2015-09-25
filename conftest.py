@@ -4,15 +4,27 @@ import pytest
 
 __author__ = 'g_trofimov'
 
+fixture = None
 
-@pytest.fixture(scope="session")
+@pytest.fixture
 def app(request):
-    fixture = Application()
-    fixture.navigation.open_home_page()
-    fixture.session.log_in(account=UserAccount())
+    global fixture
+    if fixture is None:
+        fixture = Application()
+        fixture.navigation.open_home_page()
+        fixture.session.check_login(user_account=UserAccount(), do_login=True, do_logout=False)
+    else:
+        if not fixture.is_valid():
+            fixture = Application()
+            fixture.navigation.open_home_page()
+            fixture.session.check_login(user_account=UserAccount(), do_login=True, do_logout=False)
 
+    return fixture
+
+@pytest.fixture(scope="session", autouse=True)
+def stop(request):
     def fin():
-        fixture.session.log_out()
+        fixture.session.check_login(do_login=False, do_logout=True)
         fixture.destroy()
 
     request.addfinalizer(fin)

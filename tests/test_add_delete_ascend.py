@@ -2,8 +2,11 @@
 import time
 
 
-def test_basic_checks(app):
+def test_add_ascend(app):
     app.navigation.open_home_page()
     app.ascend.add()
-    time.sleep(2)
+
+
+def test_delete_ascend(app):
+    app.navigation.open_home_page()
     app.ascend.delete_first_element()

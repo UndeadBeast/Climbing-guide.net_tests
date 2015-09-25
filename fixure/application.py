@@ -14,5 +14,13 @@ class Application():
         self.ascend = AscendHelper(self)
         self.navigation = NavigationHelper(self)
 
+    def is_valid(self):
+        try:
+            self.wd.current_url
+            return True
+        except ValueError:
+            print(ValueError)
+            return False
+
     def destroy(self):
         self.wd.quit()

@@ -12,7 +12,9 @@ class AscendHelper:
         # select sector
         wd.find_element_by_link_text("Центральный").click()
         wd.find_element_by_xpath("//tr[@id='route-id-7']/td[6]/button").click()
-        wd.find_element_by_css_selector("div.modal-footer > button.btn.btn-default").click()
+        # open "add ascend" form routs list
+        # wd.find_element_by_css_selector("div.modal-footer > button.btn.btn-default").click()
+        # open "add ascend" form list from route detail
         wd.find_element_by_css_selector("td.td-route-name").click()
         wd.find_element_by_xpath("//div[@class='panel-body']/p/span").click()
         wd.find_element_by_css_selector("#userroutes-ascent_type > label").click()
