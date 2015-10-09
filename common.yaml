@@ -1,5 +1,4 @@
-timeout: 60
-implicitly_timeout: 30
+implicitly_timeout: 5
 account:
     username: gttu_0001
     e_mail: wraithundead@gmail.com
@@ -12,7 +11,7 @@ test_data:
         region_name: 'Буки'
         sector_name: 'Центральный'
         route_name: 'Суррогат'
-ui_elements:
+ui_locale:
     ru:
         log_ig: 'Log in'
         log_out: 'Log out'

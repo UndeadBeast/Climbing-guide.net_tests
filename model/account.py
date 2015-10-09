@@ -13,6 +13,6 @@ class UserAccount(object):
         self.read_default_settings_from_config()
 
     def read_default_settings_from_config(self):
-        self.username = my_config.my_config.account.username
-        self.email = my_config.my_config.account.e_mail
-        self.password = my_config.my_config.account.password
+        self.username = my_config.config_file.account.username
+        self.email = my_config.config_file.account.e_mail
+        self.password = my_config.config_file.account.password

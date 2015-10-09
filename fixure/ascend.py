@@ -5,16 +5,17 @@ class AscendHelper:
     def __init__(self, app):
         self.app = app
 
-    def add(self, ascend_date="04-09-2015", ascend_comment="qa test"):
+    def add_hardcoded_ascend(self, ascend_date="04-09-2015", ascend_comment="qa test"):
         wd = self.app.wd
+        self.app.navigation.open_home_page()
         # select region
         wd.find_element_by_css_selector("li.list-group-item > div").click()
         # select sector
         wd.find_element_by_link_text("Центральный").click()
         wd.find_element_by_xpath("//tr[@id='route-id-7']/td[6]/button").click()
-        # open "add ascend" form routs list
+        # open "add_hardcoded_ascend ascend" form routs list
         # wd.find_element_by_css_selector("div.modal-footer > button.btn.btn-default").click()
-        # open "add ascend" form list from route detail
+        # open "add_hardcoded_ascend ascend" form list from route detail
         wd.find_element_by_css_selector("td.td-route-name").click()
         wd.find_element_by_xpath("//div[@class='panel-body']/p/span").click()
         wd.find_element_by_css_selector("#userroutes-ascent_type > label").click()
@@ -65,3 +66,9 @@ class AscendHelper:
         wd = self.app.wd
         self.app.navigation.open_my_routes_page()
         wd.find_element_by_xpath("//div[@id='w0']/table/tbody/tr/td[6]/a").click()
+
+    def count(self):
+        wd = self.app.wd
+        self.app.navigation.open_my_routes_page()
+#        return len(wd.find_elements_by_xpath("//div[@id=w0]//tr[@data-key]"))
+        return len(wd.find_elements_by_xpath("//tr[@data-key]"))
