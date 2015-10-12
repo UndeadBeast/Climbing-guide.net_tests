@@ -28,4 +28,4 @@ def test_delete_ascend(app):
     app.ascend.delete_first_element()
     time.sleep(2)
     new_my_ascends = app.ascend.get_ascends_list()
-    assert len(old_my_ascends) + 1 == len(new_my_ascends)
+    assert len(old_my_ascends) - 1 == len(new_my_ascends)
