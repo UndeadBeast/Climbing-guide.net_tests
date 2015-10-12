@@ -1,3 +1,5 @@
+from model.rout import Rout
+
 __author__ = 'g_trofimov'
 
 
@@ -72,3 +74,13 @@ class AscendHelper:
         self.app.navigation.open_my_routes_page()
 #        return len(wd.find_elements_by_xpath("//div[@id=w0]//tr[@data-key]"))
         return len(wd.find_elements_by_xpath("//tr[@data-key]"))
+
+    def get_ascends_list(self):
+        wd = self.app.wd
+        self.app.navigation.open_my_routes_page()
+        my_ascends_list = []
+        for element in wd.find_elements_by_xpath("//tr[@data-key]"):
+            route_id = element.get_attribute("data-key")
+            route_name = element.find_element_by_xpath("//tr[@data-key]/td[2]").text
+            my_ascends_list.append(Rout(name=route_name, id=route_id))
+        return my_ascends_list
