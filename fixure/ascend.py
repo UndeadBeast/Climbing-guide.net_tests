@@ -17,9 +17,11 @@ class AscendHelper:
         wd.find_element_by_xpath("//tr[@id='route-id-7']/td[6]/button").click()
         # open "add_hardcoded_ascend ascend" form routs list
         # wd.find_element_by_css_selector("div.modal-footer > button.btn.btn-default").click()
-        # open "add_hardcoded_ascend ascend" form list from route detail
+        # open route detail
         wd.find_element_by_css_selector("td.td-route-name").click()
+        # click "add ascend" button
         wd.find_element_by_xpath("//div[@class='panel-body']/p/span").click()
+        # fill ascend
         wd.find_element_by_css_selector("#userroutes-ascent_type > label").click()
         if not wd.find_element_by_xpath("//div[@id='userroutes-ascent_type']/label[1]/input").is_selected():
             wd.find_element_by_xpath("//div[@id='userroutes-ascent_type']/label[1]/input").click()
@@ -36,21 +38,24 @@ class AscendHelper:
         wd.find_element_by_id("userroutes-comment").send_keys(ascend_comment)
         wd.find_element_by_css_selector("div.modal-footer > button.btn.btn-success").click()
 
-    def fill_ascend_form(self, ascend_date="01-09-2015", ascend_comment="qa test"):
+    def fill_ascend_form(self, ascend_date="01-09-2015", ascend_comment="qa test", ascend_type=1, category=2):
         wd = self.app.wd
-        # fill ascend type. Now redpoint
-        if not wd.find_element_by_xpath("//div[@id='userroutes-ascent_type']/label[3]/input").is_selected():
-            wd.find_element_by_xpath("//div[@id='userroutes-ascent_type']/label[3]/input").click()
-        #fill date.
+        # fill ascend type
+        if not wd.find_element_by_xpath(
+                        "//div[@id='userroutes-ascent_type']/label[%s]/input" % ascend_type).is_selected():
+            wd.find_element_by_xpath("//div[@id='userroutes-ascent_type']/label[%s]/input" % ascend_type).click()
+        # fill date.
         wd.find_element_by_id("userroutes-date").click()
         wd.find_element_by_id("userroutes-date").clear()
         wd.find_element_by_id("userroutes-date").send_keys(ascend_date)
         # fill vote. Now - dislike
         if not wd.find_element_by_xpath("//div[@id='userroutes-vote']/label[2]/input").is_selected():
             wd.find_element_by_xpath("//div[@id='userroutes-vote']/label[2]/input").click()
-        # fill category. Now - 4a (second element)
-        if not wd.find_element_by_xpath("//div[@class='modal-body']/div[2]/div[1]/div/select//option[2]").is_selected():
-            wd.find_element_by_xpath("//div[@class='modal-body']/div[2]/div[1]/div/select//option[2]").click()
+        # fill category.
+        if not wd.find_element_by_xpath(
+                        "//div[@class='modal-body']/div[2]/div[1]/div/select//option[%s]" % category).is_selected():
+            wd.find_element_by_xpath(
+                "//div[@class='modal-body']/div[2]/div[1]/div/select//option[%s]" % category).click()
         # fill comment
         wd.find_element_by_id("userroutes-comment").click()
         wd.find_element_by_id("userroutes-comment").clear()
@@ -62,7 +67,7 @@ class AscendHelper:
         wd = self.app.wd
         self.app.navigation.open_my_routes_page()
         wd.find_element_by_xpath("//div[@id='w0']/table/tbody/tr/td[6]/button").click()
-        self.fill_ascend_form(ascend_date="01-01-2014", ascend_comment="qa test edir")
+        self.fill_ascend_form(ascend_date="01-01-2014", ascend_comment="qa test edit")
 
     def delete_first_element(self):
         wd = self.app.wd
@@ -72,7 +77,7 @@ class AscendHelper:
     def count(self):
         wd = self.app.wd
         self.app.navigation.open_my_routes_page()
-#        return len(wd.find_elements_by_xpath("//div[@id=w0]//tr[@data-key]"))
+        # return len(wd.find_elements_by_xpath("//div[@id=w0]//tr[@data-key]"))
         return len(wd.find_elements_by_xpath("//tr[@data-key]"))
 
     def get_ascends_list(self):
@@ -81,6 +86,6 @@ class AscendHelper:
         my_ascends_list = []
         for element in wd.find_elements_by_xpath("//tr[@data-key]"):
             route_id = element.get_attribute("data-key")
-            route_name = element.find_element_by_xpath("//tr[@data-key]/td[2]").text
+            route_name = element.find_element_by_xpath(".//td[2]").text
             my_ascends_list.append(Rout(name=route_name, id=route_id))
         return my_ascends_list

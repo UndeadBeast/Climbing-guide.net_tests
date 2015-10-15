@@ -11,9 +11,13 @@ class AscendType(Enum):
 
 
 class Ascend:
-    def __init__(self, ascend_type: AscendType, category, ascend_date, like, comment):
+    def __init__(self, ascend_type: AscendType, category, ascend_date, like, comment, route):
         self.ascend_type = ascend_type
         self.category = category
         self.ascend_date = ascend_date
         self.like = like
         self.comment = comment
+        self.route = route
+
+    def __repr__(self):
+        return "%s:%s" % (self.route.id, self.route.name)
