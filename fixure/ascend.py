@@ -1,4 +1,5 @@
-from model.rout import Rout
+# -*- coding: utf-8 -*-
+from model.route import Rout
 
 __author__ = 'g_trofimov'
 
@@ -7,20 +8,27 @@ class AscendHelper:
     def __init__(self, app):
         self.app = app
 
-    def add_hardcoded_ascend(self, ascend_date="04-09-2015", ascend_comment="qa test"):
+    def add_hardcoded_ascend(self, ascend_date="04-09-2015", ascend_comment="qa test", region_name="Буки",
+                             sector_name="Центральный", route_name="Щелеход"):
         wd = self.app.wd
         self.app.navigation.open_home_page()
         # select region
-        wd.find_element_by_css_selector("li.list-group-item > div").click()
+        wd.find_element_by_xpath("//li[@class='list-group-item']//*[contains(text(), %s)]" % region_name).click()
         # select sector
-        wd.find_element_by_link_text("Центральный").click()
-        wd.find_element_by_xpath("//tr[@id='route-id-7']/td[6]/button").click()
-        # open "add_hardcoded_ascend ascend" form routs list
-        # wd.find_element_by_css_selector("div.modal-footer > button.btn.btn-default").click()
+        wd.find_element_by_link_text(sector_name).click()
         # open route detail
+        current_route = wd.find_element_by_xpath("//tr[@data-name='%s']" % route_name)
+        route_id = current_route.get_attribute("data-route")
+        if current_route.find_element_by_xpath(".//button[contains(@class, 'add-route-ascent-btn')]"):
+            current_route.find_element_by_xpath(".//button[contains(@class, 'add-route-ascent-btn')]").click()
+        else:
+            print("Ascend for rout %s -> %s ->%s already exists! Please, delete it!" % region_name, sector_name, route_name)
+            # TODO: add deletion of ascend for this route
+        # open "add_hardcoded_ascend ascend" form routs list
         wd.find_element_by_css_selector("td.td-route-name").click()
-        # click "add ascend" button
-        wd.find_element_by_xpath("//div[@class='panel-body']/p/span").click()
+        # open route detail
+        # # click "add ascend" button
+        # wd.find_element_by_xpath("//div[@class='panel-body']/p/span").click()
         # fill ascend
         wd.find_element_by_css_selector("#userroutes-ascent_type > label").click()
         if not wd.find_element_by_xpath("//div[@id='userroutes-ascent_type']/label[1]/input").is_selected():
@@ -37,6 +45,7 @@ class AscendHelper:
         wd.find_element_by_id("userroutes-comment").clear()
         wd.find_element_by_id("userroutes-comment").send_keys(ascend_comment)
         wd.find_element_by_css_selector("div.modal-footer > button.btn.btn-success").click()
+        return route_id
 
     def fill_ascend_form(self, ascend_date="01-09-2015", ascend_comment="qa test", ascend_type=1, category=2):
         wd = self.app.wd
