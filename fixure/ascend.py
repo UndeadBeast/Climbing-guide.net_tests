@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+from fixure.utilities import WebUtilities
 from model.route import Rout
+from selenium.webdriver.common.by import By
 
 __author__ = 'g_trofimov'
 
@@ -13,17 +15,19 @@ class AscendHelper:
         wd = self.app.wd
         self.app.navigation.open_home_page()
         # select region
-        wd.find_element_by_xpath("//li[@class='list-group-item']//*[contains(text(), %s)]" % region_name).click()
+        wd.find_element_by_xpath("//li[@class='list-group-item']//*[contains(text(), {0})]".format(region_name)).click()
         # select sector
         wd.find_element_by_link_text(sector_name).click()
         # open route detail
-        current_route = wd.find_element_by_xpath("//tr[@data-name='%s']" % route_name)
+        current_route = wd.find_element_by_xpath("//tr[@data-name='{0}']".format(route_name))
         route_id = current_route.get_attribute("data-route")
-        if current_route.find_element_by_xpath(".//button[contains(@class, 'add-route-ascent-btn')]"):
+        # if current_route.is_element_present(how=By.XPATH, what=".//button[contains(@class, 'add-route-ascent-btn')]"):
+        if len(current_route.find_elements_by_xpath(".//button[contains(@class, 'add-route-ascent-btn')]")) != 0:
             current_route.find_element_by_xpath(".//button[contains(@class, 'add-route-ascent-btn')]").click()
         else:
-            print("Ascend for rout %s -> %s ->%s already exists! Please, delete it!" % region_name, sector_name, route_name)
             # TODO: add deletion of ascend for this route
+            print("Ascend for rout {0} -> {1} -> {2} already exists! Please, delete it!".format(region_name, sector_name, route_name))
+            return 0
         # open "add_hardcoded_ascend ascend" form routs list
         wd.find_element_by_css_selector("td.td-route-name").click()
         # open route detail

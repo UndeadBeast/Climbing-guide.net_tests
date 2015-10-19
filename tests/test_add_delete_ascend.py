@@ -5,7 +5,7 @@ import time
 def test_add_ascend(app):
     old_my_ascends = app.ascend.get_ascends_list()
     time.sleep(1)
-    app.ascend.add_hardcoded_ascend()
+    assert app.ascend.add_hardcoded_ascend() != 0
     time.sleep(1)
     new_my_ascends = app.ascend.get_ascends_list()
     assert len(old_my_ascends) + 1 == len(new_my_ascends)
