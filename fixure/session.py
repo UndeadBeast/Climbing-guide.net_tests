@@ -52,13 +52,14 @@ class SessionHelper:
                 self.log_in(user_account)
         # is logout available
         elif len(wd.find_elements_by_css_selector("span.glyphicon.glyphicon-user")) > 0:
-            if user_account is None:
-                if do_logout:
-                    self.log_out()
+            if user_account is None and do_logout:
+                self.log_out()
             else:
-                # check if username from parameter is actual user name
+                # check if email from parameter is actual user email
                 wd.get("http://climbing-guide.net/ru/user/settings/account")
-                if wd.find_element_by_xpath("html/body/div[4]/div[2]/div[1]/div/div[1]/h3").text != user_account.username:
+                current_user_email = wd.find_element_by_xpath(
+                    "//div[@class='panel-heading']/*[.//span[contains(@class, 'glyphicon-user')]]").text
+                if current_user_email != user_account.email:
                     if do_login:
                         self.log_in(user_account)
         else:
