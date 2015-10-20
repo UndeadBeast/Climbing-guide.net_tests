@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from random import randrange
 import time
 
 
@@ -12,10 +13,13 @@ def test_add_ascend(app):
 
 
 def test_edit_ascend(app):
-    if app.ascend.count() == 0:
+    routes_count = app.ascend.count()
+    if routes_count == 0:
         app.ascend.add_ascend()
+        routes_count += 1
+    index = randrange(routes_count)
     time.sleep(1)
-    app.ascend.edit_first_element()
+    app.ascend.edit_ascend_by_index(index)
 
 
 def test_delete_ascend(app):
@@ -23,10 +27,11 @@ def test_delete_ascend(app):
         app.ascend.add_ascend()
     time.sleep(1)
     old_my_ascends = app.ascend.get_ascends_list()
+    index = randrange(len(old_my_ascends))
     time.sleep(1)
-    app.ascend.delete_first_element()
+    app.ascend.delete_ascend_by_index(index)
     time.sleep(1)
     new_my_ascends = app.ascend.get_ascends_list()
     assert len(old_my_ascends) - 1 == app.ascend.count()
-    old_my_ascends[0:1] = []
+    old_my_ascends[index:index+1] = []
     assert sorted(old_my_ascends, key=id) == sorted(new_my_ascends, key=id)

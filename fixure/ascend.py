@@ -81,17 +81,17 @@ class AscendHelper:
         # save changes
         wd.find_element_by_css_selector("div.modal-footer > button.btn.btn-success").click()
 
-    def edit_first_element(self):
+    def edit_ascend_by_index(self, index):
         wd = self.app.wd
         self.app.navigation.open_my_routes_page()
-        wd.find_element_by_xpath("//div[@id='w0']/table/tbody/tr/td[6]/button").click()
+        wd.find_elements_by_xpath("//div[@id='w0']/table/tbody/tr/td[6]/button")[index].click()
         self.fill_ascend_form(ascend_date="01-01-2014", ascend_comment="qa test edit")
         self.my_ascends_list = None
 
-    def delete_first_element(self):
+    def delete_ascend_by_index(self, index):
         wd = self.app.wd
         self.app.navigation.open_my_routes_page()
-        wd.find_element_by_xpath("//div[@id='w0']/table/tbody/tr/td[6]/a").click()
+        wd.find_elements_by_xpath("//div[@id='w0']/table/tbody/tr/td[6]/a")[index].click()
         self.my_ascends_list = None
 
     def count(self):
